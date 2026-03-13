@@ -73,7 +73,7 @@ export const logout = asyncHandler(async(req,res,next)=> {
   .cookie( "token", null,
    { expries: new Date(Date.now()),
     httpOnly:true,
-    sameSite: "strict",
+    sameSite: "none",
     secure: ENV.NODE_ENV === "production",
   }).json({
     success: true,

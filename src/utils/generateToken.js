@@ -8,7 +8,7 @@ export const generateToken = async(user, statusCode, message ,res) => {
       Date.now()  + ENV.COOKIE_EXPIRE  * 24 * 60 * 60 * 1000
     ),
     httpOnly: true,
-    sameSite: "strict",
+    sameSite: "none",
     secure: ENV.NODE_ENV === "production"
   }).json({
     success: true,

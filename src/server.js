@@ -8,6 +8,7 @@ import { ENV } from "./lib/ENV.js"
 
 
 connectDB()
+console.log("MONGO URI:", ENV.MONGO_URI ? "Loaded" : "Missing");
 
 //-------------------
 // STARTING SEVRER

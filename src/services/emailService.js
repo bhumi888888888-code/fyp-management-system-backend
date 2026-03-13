@@ -1,34 +1,25 @@
-import nodeMailer from "nodemailer"
+import nodeMailer from "nodemailer";
 import { ENV } from "../lib/ENV.js";
 
-export const sendEmail = async({to, subject, message}) =>{
-  try {
-    const transporter = nodeMailer.createTransport({
-      host: ENV.SMTP_HOST,
-      port:ENV.SMTP_PORT,
-      auth:{
-        user:ENV.SMTP_USER,
-        pass:ENV.SMTP_PASSWORD,
-      },
-      service: ENV.SMTP_SERVICE
-    });
+export const sendEmail = async ({ to, subject, message }) => {
+  const transporter = nodeMailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: ENV.SMTP_USER,
+      pass: ENV.SMTP_PASSWORD,
+    },
+  });
 
-    const mailOptions = {
-      from : ENV.SMTP_USER,
-      to,
-      subject,
-      html: message
-    }
+  const mailOptions = {
+    from: ENV.SMTP_USER,
+    to,
+    subject,
+    html: message,
+  };
 
-   const info = await transporter.sendMail(mailOptions);
-   return info
-
-  } catch (error) {
-   throw new Error(error.message || "Cannot send email.")
-  }
-}
-
-
+  const info = await transporter.sendMail(mailOptions);
+  return info;
+};
 /**
  * Request Accepted Email
  */
@@ -54,3 +45,43 @@ export function generateRequestRejectedTemplate(supervisorName) {
     </div>
   `;
 }
+
+
+
+
+// import nodeMailer from "nodemailer"
+// import { ENV } from "../lib/ENV.js";
+
+// export const sendEmail = async({to, subject, message}) =>{
+//   try {
+//     // const transporter = nodeMailer.createTransport({
+//     //   host: ENV.SMTP_HOST,
+//     //   port:ENV.SMTP_PORT,
+//     //   auth:{
+//     //     user:ENV.SMTP_USER,
+//     //     pass:ENV.SMTP_PASSWORD,
+//     //   },
+//     //   service: ENV.SMTP_SERVICE
+//     // });
+//       const transporter = nodeMailer.createTransport({
+//          service: "gmail",
+//          auth: {
+//          user: ENV.SMTP_USER,
+//          pass: ENV.SMTP_PASSWORD,
+//          }
+//       });
+//     const mailOptions = {
+//       from : ENV.SMTP_USER,
+//       to,
+//       subject,
+//       html: message
+//     }
+
+//    const info = await transporter.sendMail(mailOptions);
+//    return info
+
+//   } catch (error) {
+//    throw new Error(error.message || "Cannot send email.")
+//   }
+// }
+
